@@ -10,6 +10,7 @@ class MobileDetectorController extends Extension {
         'IsAndroid',
         'IsIpad',
         'IsIphone',
+        'IsIos',
         'IsWebKit',
         'IsSafari',
         'IsChromium',
@@ -41,6 +42,11 @@ class MobileDetectorController extends Extension {
             return true;
         }
         return false;
+    }
+    
+    public function IsIos(){
+        $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+        return (stripos($ua,'iPhone') !== false || stripos($ua,'iPad') !== false)?true:false;
     }
     
     public function IsWebKit(){
