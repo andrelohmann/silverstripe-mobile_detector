@@ -17,7 +17,8 @@ class MobileDetectorController extends Extension {
         'IsChrome',
         'IsOperaMini',
         'IsOpera',
-        'IsFirefox'
+        'IsFirefox',
+        'IsGooglebot'
     );
     
     public function IsAndroid(){
@@ -30,7 +31,7 @@ class MobileDetectorController extends Extension {
     
     public function IsIpad(){
         $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-        if(stripos($ua,'iPad') !== false) {
+        if(stripos($ua,'ipad') !== false) {
             return true;
         }
         return false;
@@ -38,7 +39,7 @@ class MobileDetectorController extends Extension {
     
     public function IsIphone(){
         $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-        if(stripos($ua,'iPhone') !== false) {
+        if(stripos($ua,'iphone') !== false) {
             return true;
         }
         return false;
@@ -46,12 +47,12 @@ class MobileDetectorController extends Extension {
     
     public function IsIos(){
         $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-        return (stripos($ua,'iPhone') !== false || stripos($ua,'iPad') !== false)?true:false;
+        return (stripos($ua,'iphone') !== false || stripos($ua,'ipad') !== false)?true:false;
     }
     
     public function IsWebKit(){
         $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-        if(stripos($ua,'AppleWebKit') !== false) {
+        if(stripos($ua,'applewebkit') !== false) {
             return true;
         }
         return false;
@@ -59,7 +60,7 @@ class MobileDetectorController extends Extension {
     
     public function IsSafari(){
         $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-        if(stripos($ua,'Safari') !== false) {
+        if(stripos($ua,'safari') !== false) {
             return true;
         }
         return false;
@@ -67,7 +68,7 @@ class MobileDetectorController extends Extension {
     
     public function IsChromium(){
         $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-        if(stripos($ua,'Chromium') !== false) {
+        if(stripos($ua,'chromium') !== false) {
             return true;
         }
         return false;
@@ -75,7 +76,7 @@ class MobileDetectorController extends Extension {
     
     public function IsChrome(){
         $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-        if(stripos($ua,'Chrome') !== false) {
+        if(stripos($ua,'chrome') !== false) {
             return true;
         }
         return false;
@@ -83,7 +84,7 @@ class MobileDetectorController extends Extension {
     
     public function IsOperaMini(){
         $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-        if(stripos($ua,'Opera Mini') !== false) {
+        if(stripos($ua,'opera mini') !== false) {
             return true;
         }
         return false;
@@ -91,7 +92,7 @@ class MobileDetectorController extends Extension {
     
     public function IsOpera(){
         $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-        if(stripos($ua,'Opera') !== false) {
+        if(stripos($ua,'opera') !== false) {
             return true;
         }
         return false;
@@ -99,9 +100,21 @@ class MobileDetectorController extends Extension {
     
     public function IsFirefox(){
         $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-        if(stripos($ua,'Firefox') !== false) {
+        if(stripos($ua,'firefox') !== false) {
             return true;
         }
         return false;
+    }
+    
+    public function IsGooglebot(){
+        // https://support.google.com/webmasters/answer/1061943?hl=de
+        if(
+            strstr(strtolower($_SERVER['HTTP_USER_AGENT']), "googlebot") ||
+            strstr(strtolower($_SERVER['HTTP_USER_AGENT']), "http://www.google.com/bot.html") ||
+            strstr(strtolower($_SERVER['HTTP_USER_AGENT']), "Mediapartners-Google") ||
+            strstr(strtolower($_SERVER['HTTP_USER_AGENT']), "AdsBot-Google")
+        ){
+            return true;
+        }
     }
 }
